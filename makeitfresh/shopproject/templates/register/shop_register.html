@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block content %}
+<div >
+    <div class="page-content">
+        <div class="container-fluid loginbox ">
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-4">
+                    <form class="form-container" id="form" method="POST" action="">
+                        {{form.hidden_tag()}}
+                        <fieldset class="loginbox">
+                            <h1 class="heading">Shop Registration</h1>
+                                <!-- name -->
+                                <div class="form-group">
+                                        {{form.name.label(class="label")}}<br/>
+                                        {% if form.name.errors %}
+                                            {{form.name(class="form-control input is-invalid")}}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.name.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            {{form.name(class="form-control input")}}
+                                        {% endif %}
+                                        {{form.name.description}}
+                                    </div>
+                                <!-- propreiter name -->
+                                <div class="form-group">
+                                    {{form.propreiter_name.label(class="label")}}<br/>
+                                    {% if form.propreiter_name.errors %}
+                                        {{form.propreiter_name(class="form-control input is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.propreiter_name.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.propreiter_name(class="form-control input")}}
+                                    {% endif %}
+                                    {{form.propreiter_name.description}}
+                                </div>
+                                <!-- address phone number -->
+                                <div class="form-group">
+                                    {{form.address.phone_number.label(class="label")}}<br/>
+                                    {% if form.address.phone_number.errors %}
+                                        {{form.address.phone_number(class="form-control input is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.address.phone_number.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.address.phone_number(class="form-control input")}}
+                                    {% endif %}
+                                </div>
+                                <!-- address street address -->
+                                <div class="form-group">
+                                    {{form.address.street_address.label(class="label")}}<br/>
+                                    {% if form.address.street_address.errors %}
+                                        {{form.address.street_address(class="form-control input is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.address.street_address.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.address.street_address(class="form-control input")}}
+                                    {% endif %}
+                                </div>
+                                <!-- address district -->
+                                <div class="form-group">
+                                    {{form.address.district.label(class="label")}}<br/>
+                                    {% if form.address.district.errors %}
+                                        {{form.address.district(class="form-control input is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.address.district.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.address.district(class="form-control input")}}
+                                    {% endif %}
+                                </div>
+                                <!-- pincode -->
+                                <div class="form-group">
+                                    {{form.address.pincode.label(class="label")}}<br/>
+                                    {% if form.address.pincode.errors %}
+                                        {{form.address.pincode(class="form-control input is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.address.pincode.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.address.pincode(class="form-control input")}}
+                                    {% endif %}                                </div>
+                            
+                                
+                                <div>
+                                    {{form.submit(class='button btn btn-primary btn-block')}}
+                                </div> 
+                                    
+                            <div ><br/><small>Already Have an Account? <a href="#">Login</a></small></div>
+                        </fieldset>
+
+                    </form>
+                </div>    
+            </div>        
+        </div>            
+    </div>                
+</div>
+{% endblock content %}

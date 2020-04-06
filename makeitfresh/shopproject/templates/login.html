@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+        <div class="page-content container">
+            <div class="row">
+                <div class="col">
+                    <form class="form-container" id="form" method="POST" action="">
+                        <div class="form-group">
+                            {{form.username.label(class="label")}}<br/>
+                            {% if form.username.errors %}
+                                {{form.username(class="form-control input is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{form.username(class="form-control input")}}
+                            {% endif %}
+                            {{form.username.description}}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{form.password.label(class="label")}}<br/>
+                            {% if form.password.errors %}
+                                {{form.password(class="form-control input is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{form.password(class="form-control input")}}
+                            {% endif %}
+                            {{form.password.description}}
+                        </div>
+                        <div>
+                            {{form.submit(class='button btn btn-primary btn-block')}}
+                        </div>
+                        <div ><br/><small>Don't have an account <a href="#">Register</a></small></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+ {% endblock content %}   
+ 

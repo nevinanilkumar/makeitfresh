@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "/home/farih/.virtualenvs/flaskenv/bin/python",
+    
+    // "python.linting.pylintArgs": [
+    //     "--load-plugins",
+    //     "pylint-flask"
+    // ],
+    "python.linting.pylintEnabled": true,
+    
+}
