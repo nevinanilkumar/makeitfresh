@@ -1,65 +1,62 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField,SelectField
-from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
+from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError, Regexp
 
-class RegistrationShop(FlaskForm):
-    # usertype=SelectField("User Type",
-    # validators=[DataRequired()],
-    # choices=['Consumer','Shopkeeper'])
+class UserRegistrationForm(FlaskForm):
+    usertype = SelectField(
+        label="usertype",
+        validators=[DataRequired()],
+        description="Do you want to register as a buyer or a seller?",
+        choices =[('buyer', 'Buyer'), ('seller', 'Seller')],
+    )
+
+    username = StringField(
+        label="username",
+        validators=[
+            DataRequired(), 
+            Length(min=6, max=100), 
+            Regexp(r'^[A-Za-z0-9\._]+$', flags=0, message="username can only contain alphabets, numbers and symbols . and _")
+        ],
+    )
+
+    email = StringField(
+        label="email",
+        validators=[DataRequired(), Email()],
+    )
+
+    first_name = StringField(
+        label="first name",
+        validators=[DataRequired()],
+    )
+
     
-    username = StringField('Username',
-    validators=[DataRequired(),Length(min=2 , max=20)],
-    render_kw={"placeholder": "enter username"})
-
-    email=StringField('email',
-    validators=[DataRequired(),Email()],
-    render_kw={"placeholder": "enter email"})
-
-    password= PasswordField('password',
-    validators=[DataRequired()],
-    render_kw={"placeholder": "enter password"})
-
-    confirm_password= PasswordField('confirm password',
-    validators=[DataRequired(),EqualTo('password')],
-    render_kw={"placeholder": "confirm password"})
-
-    shopname=StringField('Shop Name',
-     validators=[DataRequired()],
-     render_kw={"placeholder": "enter shop name"})
-
-    propreitername=StringField('Propreiter name',
-    validators=[DataRequired()],
-    render_kw={"placeholder": "enter propreiter name"})
-
-    mobilenumber=StringField('Mobile Number',
-    validators=[DataRequired(),Length(10)],
-    render_kw={"placeholder": "enter mobile number"})
-
-    place=StringField('place',
-    validators=[DataRequired()],
-    render_kw={"placeholder": "enter place"} )
-
-    submit= SubmitField('Register')
-
-# class RegistrationCustomer(FlaskForm):
-#     username = StringField('Username',
-#     validators=[DataRequired(),Length(min=2 , max=20)],
-#     render_kw={"placeholder": "enter username"})
-
-#     email=StringField('email',
-#     validators=[DataRequired(),Email()],
-#     render_kw={"placeholder": "enter email"})
-
-#     password= PasswordField('password',
-#     validators=[DataRequired()],
-#     render_kw={"placeholder": "enter password"})
-
-#     confirm_password= PasswordField('confirm password',
-#     validators=[DataRequired(),EqualTo('password')],
-#     render_kw={"placeholder": "confirm password"})
-
-#     mobilenumber=StringField('Mobile Number',
-#     validators=[DataRequired(),Length(10)],
-#     render_kw={"placeholder": "enter mobile number"})
+    last_name = StringField(
+        label="last name",
+        validators=[DataRequired()],
+    )
     
-#     submit= SubmitField('Register')
+    password = PasswordField(
+        label="password",
+        validators=[
+            DataRequired(),
+            Length(min=8, max=100),
+            Regexp(
+                r'^(?=[a-zA-z0-9@_!%]*\d)(?=[a-zA-z0-9@_!%]*[a-zA-z])[a-zA-z0-9@_!%]{8,100}$', 
+                flags=0, 
+                message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
+            ),
+        ],
+        description="Must be atleast 8 characters long and include at least one letter and one number."
+    )
+
+    confirm_password = PasswordField(
+        label="confirm password",
+        validators=[
+            DataRequired(),
+            EqualTo('password', message="Passwords do not match.")
+        ],
+        description="Please re-enter your password"
+    )
+
+    submit = SubmitField(label="register")
+
