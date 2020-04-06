@@ -60,3 +60,26 @@ class UserRegistrationForm(FlaskForm):
 
     submit = SubmitField(label="register")
 
+class LoginForm(FlaskForm):
+    username = StringField(
+        label="username",
+        validators=[
+            DataRequired(), 
+            Length(min=6, max=100), 
+            Regexp(r'^[A-Za-z0-9\._]+$', flags=0, message="username can only contain alphabets, numbers and symbols . and _")
+        ],
+    )
+
+    password = PasswordField(
+        label="password",
+        validators=[
+            DataRequired(),
+            Length(min=8, max=100),
+            Regexp(
+                r'^(?=[a-zA-z0-9@_!%]*\d)(?=[a-zA-z0-9@_!%]*[a-zA-z])[a-zA-z0-9@_!%]{8,100}$', 
+                flags=0, 
+                message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
+            ),
+        ],
+        description="Must be atleast 8 characters long and include at least one letter and one number."
+    )
