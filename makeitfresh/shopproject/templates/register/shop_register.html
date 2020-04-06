@@ -9,7 +9,7 @@
                         {{form.hidden_tag()}}
                         <fieldset class="loginbox">
                             <h1 class="heading">Shop Registration</h1>
-                                <!-- usertype -->
+                                <!-- name -->
                                 <div class="form-group">
                                         {{form.name.label(class="label")}}<br/>
                                         {% if form.name.errors %}
@@ -24,7 +24,7 @@
                                         {% endif %}
                                         {{form.name.description}}
                                     </div>
-                                <!-- username -->
+                                <!-- propreiter name -->
                                 <div class="form-group">
                                     {{form.propreiter_name.label(class="label")}}<br/>
                                     {% if form.propreiter_name.errors %}
@@ -39,7 +39,7 @@
                                     {% endif %}
                                     {{form.propreiter_name.description}}
                                 </div>
-                                <!-- email -->
+                                <!-- address phone number -->
                                 <div class="form-group">
                                     {{form.address.phone_number.label(class="label")}}<br/>
                                     {% if form.address.phone_number.errors %}
@@ -53,7 +53,7 @@
                                         {{form.address.phone_number(class="form-control input")}}
                                     {% endif %}
                                 </div>
-                                <!-- first name -->
+                                <!-- address street address -->
                                 <div class="form-group">
                                     {{form.address.street_address.label(class="label")}}<br/>
                                     {% if form.address.street_address.errors %}
@@ -67,7 +67,7 @@
                                         {{form.address.street_address(class="form-control input")}}
                                     {% endif %}
                                 </div>
-                                <!-- last name -->
+                                <!-- address district -->
                                 <div class="form-group">
                                     {{form.address.district.label(class="label")}}<br/>
                                     {% if form.address.district.errors %}
@@ -81,7 +81,7 @@
                                         {{form.address.district(class="form-control input")}}
                                     {% endif %}
                                 </div>
-                                <!-- password -->
+                                <!-- pincode -->
                                 <div class="form-group">
                                     {{form.address.pincode.label(class="label")}}<br/>
                                     {% if form.address.pincode.errors %}
@@ -94,7 +94,6 @@
                                     {% else %}
                                         {{form.address.pincode(class="form-control input")}}
                                     {% endif %}                                </div>
-                                <!-- confirm password -->
                             
                                 
                                 <div>
