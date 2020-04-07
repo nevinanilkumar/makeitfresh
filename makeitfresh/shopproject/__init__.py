@@ -2,12 +2,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from shopproject.config import Config
 
-app=Flask(__name__)
-app.config['SECRET_KEY']='9b11ac4263069692c46bd2a3edefba42ede6837c'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
-db = SQLAlchemy(app)
-bcrypt=Bcrypt(app)
+
+
+db = SQLAlchemy()
+bcrypt=Bcrypt()
 # from .models import User
 
 # login_manager = LoginManager(app)
@@ -18,10 +18,18 @@ bcrypt=Bcrypt(app)
 # def load_user(user_id):
 #     return User.query.get(int(user_id))
 
-from shopproject.users.routes import users
-from shopproject.main.routes import  main
-from shopproject.shops.routes import shops
 
-app.register_blueprint(users)
-app.register_blueprint(shops)
-app.register_blueprint(main)
+
+def create_app(config_call=Config):
+    app=Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
+    bcrypt.init_app(app)
+    from shopproject.users.routes import users
+    from shopproject.main.routes import  main
+    from shopproject.shops.routes import shops
+    app.register_blueprint(users)
+    app.register_blueprint(shops)
+    app.register_blueprint(main)
+    return app
+

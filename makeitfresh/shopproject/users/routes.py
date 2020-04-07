@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from shopproject import db, app, bcrypt
+from shopproject import db, bcrypt
 from shopproject.models import User
 from shopproject.users.forms import UserRegistrationForm, LoginForm
 

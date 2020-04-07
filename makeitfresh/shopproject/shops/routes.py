@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, url_for
 from shopproject.shops.forms import ShopRegistrationForm
 from shopproject.models import Shop
-from shopproject import app,db, bcrypt
+from shopproject import db, bcrypt
 
 shops = Blueprint('shops', __name__)
 #gets redirected from userregistration form
