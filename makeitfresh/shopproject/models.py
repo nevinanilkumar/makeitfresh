@@ -14,9 +14,8 @@ class Seller(db.Model):
         return f'<Seller {self.id}>'
 
 class Buyer(db.Model):
-    __tablename__ = 'buyer'
+    __tablename__ = 'buyers'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    username = db.Column(db.String(100), unique=True, nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
