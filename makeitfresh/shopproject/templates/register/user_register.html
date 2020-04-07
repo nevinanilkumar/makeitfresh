@@ -11,18 +11,18 @@
                             <h1 class="heading">User Registration</h1>
                                 <!-- usertype -->
                                 <div class="form-group">
-                                        {{form.usertype.label(class="label")}}<br/>
-                                        {% if form.usertype.errors %}
-                                            {{form.usertype(class="form-control input is-invalid")}}
+                                        {{form.user_type.label(class="label")}}<br/>
+                                        {% if form.user_type.errors %}
+                                            {{form.user_type(class="form-control input is-invalid")}}
                                             <div class="invalid-feedback">
-                                                {% for error in form.usertype.errors %}
+                                                {% for error in form.user_type.errors %}
                                                     <span>{{ error }}</span>
                                                 {% endfor %}
                                             </div>
                                         {% else %}
-                                            {{form.usertype(class="form-control input")}}
+                                            {{form.user_type(class="form-control input")}}
                                         {% endif %}
-                                        {{form.usertype.description}}
+                                        {{form.user_type.description}}
                                     </div>
                                 <!-- username -->
                                 <div class="form-group">

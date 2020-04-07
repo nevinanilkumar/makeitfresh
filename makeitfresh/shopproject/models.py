@@ -1,33 +1,19 @@
-from shopproject import db,login_manager
+from shopproject import db
+from flask_login import UserMixin
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-class Seller(db.Model):
-    __tablename__ = 'sellers'
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
+    user_type = db.Column(db.String(10), nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    shops = db.relationship('Shop', lazy='select', backref='seller')
+
+    def __str__(self):
+        return f'<User {self.id}>'
     
-    def __str__(self):
-        return f'<Seller {self.id}>'
-
-class Buyer(db.Model):
-    __tablename__ = 'buyers'
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
-
-    def __str__(self):
-        return f'<Buyer {self.id}>'
 
 class Shop(db.Model):
     __tablename__ = 'shops'
@@ -38,7 +24,8 @@ class Shop(db.Model):
     street_address = db.Column(db.String(255), nullable=False)
     district = db.Column(db.String(50), nullable=False)
     pincode = db.Column(db.String(6), nullable=False)
-    seller_id = db.Column(db.Integer, db.ForeignKey('sellers.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    authorised = db.Column(db.Boolean, default=False, nullable=False)
 
     def __str__(self):
         return f'<Shop {self.id}>'
