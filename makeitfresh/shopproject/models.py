@@ -1,4 +1,8 @@
-from shopproject import db
+from shopproject import db,login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class Seller(db.Model):
     __tablename__ = 'sellers'
@@ -16,7 +20,6 @@ class Seller(db.Model):
 class Buyer(db.Model):
     __tablename__ = 'buyer'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    username = db.Column(db.String(100), unique=True, nullable=False)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
