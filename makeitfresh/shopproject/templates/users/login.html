@@ -4,6 +4,10 @@
             <div class="row">
                 <div class="col">
                     <form class="form-container" id="form" method="POST" action="">
+                        {{form.hidden_tag()}}
+                        <fieldset class="loginbox">
+                            <h1 class="heading">Login</h1>
+                                <!-- usertype -->
                         <div class="form-group">
                             {{form.username.label(class="label")}}<br/>
                             {% if form.username.errors %}
@@ -32,6 +36,10 @@
                                 {{form.password(class="form-control input")}}
                             {% endif %}
                             {{form.password.description}}
+                        </div>
+                        </fieldset>
+                        <div>
+                            {{form.remember}}
                         </div>
                         <div>
                             {{form.submit(class='button btn btn-primary btn-block')}}

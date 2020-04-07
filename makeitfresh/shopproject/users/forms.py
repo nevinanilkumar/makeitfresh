@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField, FormField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, FormField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from shopproject.models import  User
 from shopproject.forms import Address
@@ -90,13 +90,8 @@ class LoginForm(FlaskForm):
         label="password*",
         validators=[
             DataRequired(),
-            Length(min=8, max=100),
-            Regexp(
-                r'^(?=[a-zA-z0-9@_!%]*\d)(?=[a-zA-z0-9@_!%]*[a-zA-z])[a-zA-z0-9@_!%]{8,100}$',
-                flags=0,
-                message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
-            ),
         ],
         description="Must be atleast 8 characters long and include at least one letter and one number."
     )
+    remember = BooleanField(label="Remember Me")
     submit=SubmitField(label="Login")

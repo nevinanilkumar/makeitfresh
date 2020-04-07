@@ -38,37 +38,48 @@
           <a class="nav-link" href="{{url_for('main.home')}}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="">About Us</a>
+        </li>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('users.account')}}">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('users.logout')}}">Logout</a>
+        </li>
+        {% else %}
+        
+        <li class="nav-item">
           <a class="nav-link" href="{{url_for('users.userRegistration')}}">Register</a>
         </li>
         <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('users.login')}}">Login</a>
-                  </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">About Us</a>
+          <a class="nav-link" href="{{url_for('users.login')}}">Login</a>
         </li>
+        {% endif %}
+        
       </ul>
     </div>
   </nav>
   <div>
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, message in messages %}
-              {% if category == 'message' %}
-                <div class="alert alert-warning" role="alert">
-              {% else %}
-                <div class="alert alert-{{ category }}" role="alert">
-              {% endif %}
-                {{ message }}
-              </div>
-          {% endfor %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'message' %}
+    <div class="alert alert-warning" role="alert">
+      {% else %}
+      <div class="alert alert-{{ category }}" role="alert">
         {% endif %}
-    {% endwith %}
-  </div>
-  {% block content %}
-  {% endblock content %}
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+    {% block content %}
+    {% endblock content %}
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 </body>
 
 </html>

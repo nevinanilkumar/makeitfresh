@@ -8,15 +8,8 @@ from shopproject.config import Config
 
 db = SQLAlchemy()
 bcrypt=Bcrypt()
-# from .models import User
+login_manager = LoginManager()
 
-# login_manager = LoginManager(app)
-# login_manager.login_view='Login'
-# login_manager.login_message_category='info'
-
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.get(int(user_id))
 
 
 
@@ -25,6 +18,10 @@ def create_app(config_call=Config):
     app.config.from_object(Config)
     db.init_app(app)
     bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = "users.login"
+    login_manager.message = "Please login to access the page."
+    login_manager.login_message_category = "info"
     from shopproject.users.routes import users
     from shopproject.main.routes import  main
     from shopproject.shops.routes import shops
