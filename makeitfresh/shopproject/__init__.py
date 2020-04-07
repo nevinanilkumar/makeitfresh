@@ -18,4 +18,10 @@ bcrypt=Bcrypt(app)
 # def load_user(user_id):
 #     return User.query.get(int(user_id))
 
-from shopproject import routes
+from shopproject.users.routes import users
+from shopproject.main.routes import  main
+from shopproject.shops.routes import shops
+
+app.register_blueprint(users)
+app.register_blueprint(shops)
+app.register_blueprint(main)
