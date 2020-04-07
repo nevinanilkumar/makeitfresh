@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, FormField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from shopproject.info import get_districts
+from shopproject.models import  Buyer,Seller,Shop
 
 districts = get_districts()
 
@@ -85,6 +86,16 @@ class UserRegistrationForm(FlaskForm):
         description="Please re-enter your password"
     )
     submit = SubmitField(label="register")
+#i think the below code will prevent same vlaues for username and email in both Seller and Buyer
+    def validate_username(self,username):
+        user=Seller.query.filter_by(username=username.data).first() or Buyer.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('This username is taken. Kindly choose another one')
+
+    def validate_email(self,email):
+        user=Seller.query.filter_by(email=email.data).first() or Buyer.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('This email is taken. Kindly choose another one')
 
 
 #Registration form for shopkeepers
