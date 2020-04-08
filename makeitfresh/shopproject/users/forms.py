@@ -9,7 +9,6 @@ class UserRegistrationForm(FlaskForm):
     user_type = SelectField(
         label="usertype*",
         validators=[DataRequired()],
-        description="Do you want to register as a buyer or a seller?",
         choices=[('buyer', 'Buyer'), ('seller', 'Seller')],
     )
     username = StringField(
@@ -44,7 +43,6 @@ class UserRegistrationForm(FlaskForm):
                 message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
             ),
         ],
-        description="Must be atleast 8 characters long and include at least one letter and one number."
     )
     confirm_password = PasswordField(
         label="confirm password*",
@@ -91,7 +89,6 @@ class LoginForm(FlaskForm):
         validators=[
             DataRequired(),
         ],
-        description="Must be atleast 8 characters long and include at least one letter and one number."
     )
     remember = BooleanField(label="Remember Me")
     submit=SubmitField(label="Login")
