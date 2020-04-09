@@ -12,3 +12,7 @@ def add_header(r):
 @main.route("/home")
 def home():
     return render_template("main/home.html")
+
+@main.route("/buyerhome")
+def BuyerHome():
+    return render_template("homebuyer.html")
