@@ -30,14 +30,4 @@ def create_app(config_call=Config):
     app.register_blueprint(main)
     return app
 
-def createdb():
-    app = create_app()
-    with app.app_context():
-        db.create_all()
-        db.session.commit()
 
-def deletedb():
-    app = create_app()
-    with app.app_context():
-        db.drop_all()
-        db.session.commit()
