@@ -60,6 +60,7 @@ class Shop(db.Model):
 
 # Database model for storing item information.
 # The primary key is id.
+# Not finalised.
 class Item(db.Model):
     __tablename__ = "items"
     id = db.Column(db.Integer, primary_key = True, nullable=False)

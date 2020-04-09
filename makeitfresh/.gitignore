@@ -3,3 +3,4 @@
 .vscode
 pycache
 *.sqlite
+*.sqlite-journal
