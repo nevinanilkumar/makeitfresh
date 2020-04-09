@@ -51,7 +51,7 @@ class Shop(db.Model):
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, unique=True)
-    authorised = db.Column(db.Boolean, default=False, nullable=False)
+    is_authorised = db.Column(db.Boolean, default=False, nullable=False)
     items = db.relationship('Item', secondary = shopitemlink, backref="shops", lazy=True)
 
     def __str__(self):
@@ -70,7 +70,7 @@ class Item(db.Model):
 
 
 # Database model for storing address information.
-# Using a seperate models because a buyer might have multiple addresses. 
+# Using a seperate model because a buyer might have multiple addresses. 
 # This models allows users to have multiple address as user_id does not have a unique constraint.
 class Address(db.Model):
     __tablename__ = "addresses"
