@@ -1,0 +1,11 @@
+NAME,PROPREITER_NAME,PHONE_NUMBER,ADRESS_ID,USER_ID,IS_AUTHORISED
+nevinshop,nevin,9847373747,1,1,authorised
+bakery,ramesh,9876543210,2,2,authorised
+thebakers,suresh,9874563210,3,3,authorised
+lazza,lasar,8975642310,4,4,authorised
+meriboy,grahambell,9847373747,5,5,authorised
+unclejohn,john,9845612370,6,6,authorised
+chicking,alexander,9856237410,7,7,authorised
+theartofcars,Dominic Toretto,7562622170,8,8,authorised
+thebookshop,JKrowling,8888877777,9,9,authorised
+theartofmotorcycles,mallutraveller,10,10,authorised
