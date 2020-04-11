@@ -51,8 +51,8 @@ class Shop(db.Model):
     phone_number = db.Column(db.String(10), unique=True, nullable=False)
     address_id = db.Column(db.Integer, db.ForeignKey('addresses.id'), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, unique=True)
-    is_authorised = db.Column(db.Boolean, default=False, nullable=False)
     items = db.relationship('Item', secondary = shopitemlink, backref="shops", lazy=True)
+    is_authorised = db.Column(db.Boolean, default=False, nullable=False)
 
     def __str__(self):
         return f'<Shop {self.id}>'

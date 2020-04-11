@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint
-
+from flask import render_template, Blueprint, request, json
+from flask_login import login_required, current_user
+from shopproject.models import Shop
 main = Blueprint('main', __name__)
 
 @main.after_request
@@ -10,7 +11,22 @@ def add_header(r):
 
 @main.route("/")
 @main.route("/home")
+@login_required
 def home():
+    if current_user.user_type == "buyer":
+        search_entry = request.args.get("shop")
+        if request.args.get("shop"):
+            shops = []
+            for shop in Shop.query.filter(Shop.name.startswith(f"{search_entry}")).all():
+                shops.append({
+                    "name":shop.name,
+                    "phone_number":shop.phone_number,
+                })
+            return json.jsonify(shops)
+
+        return render_template("main/buyer.html")
+    
+        
     return render_template("main/home.html")
 
 @main.route("/buyerhome")
