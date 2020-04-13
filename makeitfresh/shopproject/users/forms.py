@@ -96,7 +96,7 @@ class LoginForm(FlaskForm):
 
 class UpdateAccount(FlaskForm):
     username = StringField(
-        label="username*",
+        label="username",
         validators=[
             DataRequired(),
             Length(min=6, max=100),
@@ -104,4 +104,57 @@ class UpdateAccount(FlaskForm):
                    message="username can only contain alphabets, numbers and symbols . and _")
         ],
     )
-    
+    mobile_number = StringField(
+        label="mobile number",
+        validators=[
+            DataRequired(),
+            Length(10),
+            Regexp(r'^[0-9]{10}$', flags=0, "invalid mobile number")
+        ],
+    )
+    password = PasswordField(
+        label="enter password to update",
+        validators=[
+            DataRequired(),
+        ],
+    )
+    submit = SubmitField(label="update")
+
+class UpdatePassword(FlaskForm):
+    current_password = PasswordField(
+        label="current password",
+        validators=[
+            DataRequired(),
+        ],
+    )
+    new_password = PasswordField(
+        label="new password",
+        validators=[
+            DataRequired(),
+        ],
+    )
+    confirm_password = PasswordField(
+        label="confirm new password",
+        validators=[
+            DataRequired(),
+            EqualTo('new_password', message="passwords do not match"),
+        ],
+    )
+    submit=SubmitField(label="change password")
+
+class DeletePassword(FlaskForm):
+    email = StringField(
+        label="email",
+        validators=[
+            DataRequired(),
+            Email(),
+        ],
+    )
+    password = StringField(
+        label="password",
+        validators=[
+            DataRequired(),
+        ]
+    )
+    submit=SubmitField(label="delete")
+
