@@ -22,7 +22,7 @@ def test_app(app):
     client = app.test_client()
     resp = client.get("/")
     assert not app.config["WTF_CSRF_ENABLED"]
-    assert resp.status_code == 200
+    assert resp.status_code == 300
 
 def register_user(app,**kwargs):
     client = app.test_client()
@@ -71,6 +71,11 @@ def test_login_user(app):
     if resp.status_code == 302:
         global current_user
         current_user = User.query.filter_by(username="testuser1").first()
+    
+    with app.test_client() as client:
+        resp1 = client.get("/")
+        assert resp1.status_code == 200
+    
 
 
 def test_fail_login_user(app):

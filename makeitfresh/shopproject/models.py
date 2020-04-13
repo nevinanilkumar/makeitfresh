@@ -21,8 +21,22 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    authenticated = db.Column(db.Boolean, default=False)
+    
     def __str__(self):
         return f'<User {self.id}>'
+
+    def is_authenticated(self):
+        return self.authenticated
+    
+    def is_active(self):
+        return True
+
+    def get_id(self):
+        return self.id
+    
+    def is_anonymous(self):
+        return False
 
 
 # Association table for creating many-many relationship between shops table and items table.

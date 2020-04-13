@@ -45,6 +45,7 @@ def login():
     elif form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
+            user.authenticated = True
             login_user(user, remember=form.remember.data)
             next_page= request.args.get('next')
             if next_page and not is_safe_url(next_page, allowed_hosts={"127.0.0.1:5000"}):
@@ -60,6 +61,8 @@ def login():
 @users.route("/logout")
 @login_required
 def logout():
+    user = User.query.get(current_user.id)
+    user.authenticated=False
     logout_user()
     return redirect(url_for('main.home'))
 

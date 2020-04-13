@@ -1,6 +1,0 @@
-*.json
-*.pyc 
-.vscode
-pycache
-*.sqlite
-*.sqlite-journal

@@ -7,7 +7,7 @@ db.drop_all()
 db.session.commit()
 db.create_all()
 db.session.commit()
-with open("users.csv") as csv_file:
+with open("csv/users.csv") as csv_file:
     csv_reader = csv.reader(csv_file,delimiter=",")
     count = 0
     for row in csv_reader:
@@ -24,7 +24,7 @@ with open("users.csv") as csv_file:
             db.session.add(user)
         count +=1
 
-with open("address.csv") as csv_file:
+with open("csv/address.csv") as csv_file:
     csv_reader = csv.reader(csv_file,delimiter=",")
     count = 0
     for row in csv_reader:
@@ -38,7 +38,7 @@ with open("address.csv") as csv_file:
             db.session.add(address)
         count +=1
 
-with open("shops.csv") as csv_file:
+with open("csv/shops.csv") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     count = 0
     for row in csv_reader:

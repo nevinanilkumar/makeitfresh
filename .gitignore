@@ -3,3 +3,5 @@
 .vscode
 pycache
 *.sqlite
+*.sqlite-journal
+*.pytest_cache
