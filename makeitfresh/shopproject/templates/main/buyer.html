@@ -2,118 +2,120 @@
 {% block content %}
 <div class="container">
 
-  <h1 class="pageheading">Shops in Kasargod</h1>
 
   <div class="p-1 bg-dark rounded rounded-pill shadow-sm mb-4 mt-4">
     <div class="input-group">
       <input type="search" placeholder="Which shop are you searching for?" aria-describedby="button-addon1"
-        class="form-control border-0 bg-dark ml-2" id="search_box" name="search">
+        class="form-control border-0 bg-dark text-light ml-2" id="search_box" name="search">
       <div class="input-group-append">
         <button id="button-addon1" type="click" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
       </div>
     </div>
   </div>
-  <div>
-    <p><a href="#" class="link">shop in another locality</a></p>
-  </div>
 
 
-<div id="cards">
-  <div class="card-deck mt-4 mb-2" id="card_deck">
-    <div class="card" id="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
+  <div id="cards">
+    <div class="card-deck mt-4 mb-2" id="card_deck">
+      <div class="card" id="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
+          <small class="text-muted">Phone: 987654321</small>
+        </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
-        <small class="text-muted">Phone: 987654321</small>
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Closed|opens 3 PM</small><br />
+          <small class="text-muted">Phone: 9847373747</small>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
+          <small class="text-muted">Phone: 987654321</small>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
+    <div class="card-deck mt-4">
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
+          <small class="text-muted">Phone: 987654321</small>
+        </div>
       </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Closed|opens 3 PM</small><br />
-        <small class="text-muted">Phone: 9847373747</small>
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Closed|opens 3 PM</small><br />
+          <small class="text-muted">Phone: 9847373747</small>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
-        <small class="text-muted">Phone: 987654321</small>
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Shop Name</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
+          <small class="text-muted">Phone: 987654321</small>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card-deck mt-4">
-    <div class="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
-        <small class="text-muted">Phone: 987654321</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Closed|opens 3 PM</small><br />
-        <small class="text-muted">Phone: 9847373747</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="{{url_for('static',filename='icons/iconshop.jpg')}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Shop Name</h5>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Shop Open Now|closes 9 PM</small><br />
-        <small class="text-muted">Phone: 987654321</small>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -124,5 +126,9 @@
     <small>Designed and Developed by the 8BITCOMPANY</small>
   </div>
 </footer>
-<script src="{{url_for('static', filename='scripts/main/search1.js')}}"></script>
+
+
 {% endblock content %}
+{% block scripts %}
+<script src="{{url_for('static', filename='scripts/main/search.js')}}"></script>
+{% endblock scripts %}

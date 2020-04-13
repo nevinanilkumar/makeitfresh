@@ -1,59 +1,70 @@
-search = function() {
-    const search_box = document.querySelector("#search_box");
-    const card_deck = document.querySelector("#card_deck");
-    const CARD_DECK_HTML = card_deck.innerHTML;
-    
-    function create_card_deck() {
-        return `<div class="card-deck mt-4 mb-2" id = "card_deck"></div>`;
-    }
+let namespace = function () {
+  const SEARCH = document.querySelector("#search_box");
+  const CARD = document.querySelector(".card");
+  const CARDS = document.querySelector("#cards").cloneNode(deep = true);
+  const DECKSIZE = 3;
+  SEARCH.addEventListener("keyup", searchEvent);
 
-    function create_card(shopname, phonenumber) {
-        return `
-        <div class="card">
-        <img class="card-img-top" src="../../static/icons/iconshop.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">${shopname}</h5>
-          <p class="card-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Shop Closed|opens 3 PM</small><br/>
-          <small class="text-muted">Phone: ${phonenumber}</small>
-        </div>
-        `;
-    }
-    function create_request(url, name, load_event) {
-        req = new XMLHttpRequest();
-        req.open("GET", url+name);
-        req.responseType = "json";
-        req.onload = load_event;
-        console.log(req);
-        return req
-    }
 
-    search_box.addEventListener("keyup", searchEvent);
-    function searchEvent(event) {
-        if (event.target.value !== "") {
-            url = "http://127.0.0.1:5000/?shop="+event.target.value;
-            request = new XMLHttpRequest();
-            request.open("GET", url);
-            request.responseType = "json";
-            request.onload = function(e) {
-                if (request.status == 200) {
-                    console.log(request.response);
-                    obj = request.response[0];
-                    card_deck.innerHTML = create_card(obj.name, obj.phone_number);
-                }
+  function create_card(name="", num="", display="hidden") {
+    const card = CARD.cloneNode(deep = true);
+    const title = card.querySelector(".card-title");
+    const phone_number = card.querySelectorAll(".text-muted")[1];
+    title.textContent = name;
+    phone_number.textContent = num;
+    card.style.visibility=display;
+    return card;
+  }
+
+
+  function create_deck() {
+    const deck = document.createElement("div");
+    deck.className = "card-deck mb-4";
+    return deck;
+  }
+
+
+  function searchEvent(event) {
+    const cards = document.querySelector("#cards");
+    const new_cards = document.createElement("div");
+    if (event.target.value !== ""){
+      const obj = get_obj(`shop=${event.target.value}`);
+      obj.onload = function(e) {
+        if (obj.response.length > 0) {
+          let deck;
+          obj.response.forEach(
+            (shop,index) => {
+              if(index % DECKSIZE === 0) {
+                console.log(index);
+                deck = create_deck();
+                new_cards.appendChild(deck);
+                
+              }
+              deck.appendChild(create_card(shop.name,shop.phone_number, "visible"));
+            });
+            if (obj.response.length % DECKSIZE !== 0 && (window.innerWidth > 575)) {
+              for(let i = 0, len=obj.response.length; i < DECKSIZE - len % DECKSIZE; i++) 
+                deck.append(create_card());
+                
             }
-            
-            request.send();
-            console.log(request);
+          new_cards.appendChild(deck);
         }
-        else {
-            card_deck.innerHTML = CARD_DECK_HTML;
-            console.log("no input");
-        }
+        cards.innerHTML = new_cards.innerHTML;
+      }
     }
+    else {
+      cards.innerHTML = CARDS.innerHTML;
+    }
+  }
+
+
+  function get_obj(txt) {
+    url = "http://127.0.0.1:5000/?";
+    req = new XMLHttpRequest();
+    req.open("GET", url + txt, true);
+    req.responseType = "json";
+    req.send()
+    return req;
+  }
 
 }()

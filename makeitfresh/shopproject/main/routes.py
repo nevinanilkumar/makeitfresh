@@ -17,9 +17,9 @@ def home():
         search_entry = request.args.get("shop")
         if request.args.get("shop"):
             shops = []
-            for shop in Shop.query.filter(Shop.name.startswith(f"{search_entry}")).all():
+            for shop in Shop.query.filter(Shop.name.startswith(f"{search_entry}" or f"{search_entry}".lower())).all():
                 shops.append({
-                    "name":shop.name,
+                    "name":shop.name.lower(),
                     "phone_number":shop.phone_number,
                 })
             return json.jsonify(shops)
