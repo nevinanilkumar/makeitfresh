@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from is_safe_url import is_safe_url
 from shopproject import db, bcrypt
 from shopproject.models import User
-from shopproject.users.forms import UserRegistrationForm, LoginForm
+from shopproject.users.forms import UserRegistrationForm, LoginForm, ResetPasswordForm, RequestResetForm
 
 users = Blueprint('users', __name__)
 
@@ -71,6 +71,29 @@ def logout():
 @login_required
 def account():
     return render_template("users/account.html", title="Account")
+
+# #Not complete
+# @users.route("/reset_password", methods=["GET", "POST"])
+# def request_resest_password():
+#     if current_user.is_authenticated():
+#         return redirect(url_for("main.home"))
+#     form = RequestResetForm()
+#     return 
+
+# #Not complete
+# @users.route("reset_password/<token>", methods=["GET", "POST"])
+# def reset_token(token):
+#     if current_user.is_authenticated():
+#         return redirect(url_for("main.home"))
+#     user = User.verify_reset_token(token)
+#     if user is None:
+#         flash("That is an invalid or expired token", "warning")
+#         return redirect(url_for("users.request_reset_password"))
+#     form = ResetPasswordForm()
+#     return
+
+
+
 
 
 

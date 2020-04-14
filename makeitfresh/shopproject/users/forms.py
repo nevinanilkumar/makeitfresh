@@ -109,7 +109,7 @@ class UpdateAccount(FlaskForm):
         validators=[
             DataRequired(),
             Length(10),
-            Regexp(r'^[0-9]{10}$', flags=0, "invalid mobile number")
+            Regexp(r'^[0-9]{10}$', flags=0, message="invalid mobile number")
         ],
     )
     password = PasswordField(
@@ -120,6 +120,7 @@ class UpdateAccount(FlaskForm):
     )
     submit = SubmitField(label="update")
 
+
 class UpdatePassword(FlaskForm):
     current_password = PasswordField(
         label="current password",
@@ -128,9 +129,15 @@ class UpdatePassword(FlaskForm):
         ],
     )
     new_password = PasswordField(
-        label="new password",
+        label="password*",
         validators=[
             DataRequired(),
+            Length(min=8, max=100),
+            Regexp(
+                r'^(?=[a-zA-z0-9@_!%]*\d)(?=[a-zA-z0-9@_!%]*[a-zA-z])[a-zA-z0-9@_!%]{8,100}$',
+                flags=0,
+                message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
+            ),
         ],
     )
     confirm_password = PasswordField(
@@ -142,7 +149,8 @@ class UpdatePassword(FlaskForm):
     )
     submit=SubmitField(label="change password")
 
-class DeletePassword(FlaskForm):
+
+class DeleteAccount(FlaskForm):
     email = StringField(
         label="email",
         validators=[
@@ -157,4 +165,57 @@ class DeletePassword(FlaskForm):
         ]
     )
     submit=SubmitField(label="delete")
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField(
+        label="email",
+        validators=[
+            DataRequired(),
+            Email(),
+        ],
+    )
+    submit=SubmitField(label="request password reset")
+    def validate_email(self, email):
+
+        email_exists = User.query.filter_by(email=email.data.strip()).first()
+        if not email_exists:
+            raise ValidationError("No account associated with email address.")
+
+
+class ResetPasswordForm(FlaskForm):
+    new_password = PasswordField(
+        label="password*",
+        validators=[
+            DataRequired(),
+            Length(min=8, max=100),
+            Regexp(
+                r'^(?=[a-zA-z0-9@_!%]*\d)(?=[a-zA-z0-9@_!%]*[a-zA-z])[a-zA-z0-9@_!%]{8,100}$',
+                flags=0,
+                message="Invalid password format. Must be atleast 8 characters long and include at least one letter and one number."
+            ),
+        ],
+    )
+    confirm_password = PasswordField(
+        label="confirm new password",
+        validators=[
+            DataRequired(),
+            EqualTo('new_password', message="passwords do not match"),
+        ],
+    )
+    submit=SubmitField(label="change password")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

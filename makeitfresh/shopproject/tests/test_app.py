@@ -21,8 +21,9 @@ def app():
 def test_app(app):
     client = app.test_client()
     resp = client.get("/")
+    assert app.config["TESTING"]
     assert not app.config["WTF_CSRF_ENABLED"]
-    assert resp.status_code == 300
+    assert resp.status_code == 302
 
 def register_user(app,**kwargs):
     client = app.test_client()
@@ -41,7 +42,6 @@ def register_user(app,**kwargs):
     return resp
 
 def login_user(app, **kwargs):
-
     client=app.test_client()
     resp = client.post("/login",
         data = {
@@ -60,37 +60,16 @@ def test_validate_register(app):
         email="testuser1@company.com",
         password="testing123",
         confirm_password="testing123",
-        redirect=True
+        redirect=False
     )
-    assert resp.status_code == 200
-    assert b"login to view the website." in resp.data
+    assert resp.status_code == 302
+    assert not User.query.get(1).is_authenticated()
 
-def test_login_user(app):
-    
-    resp = login_user(app, username="testuser1", password="testing123", redirect=False)
-    if resp.status_code == 302:
-        global current_user
-        current_user = User.query.filter_by(username="testuser1").first()
-    
-    with app.test_client() as client:
-        resp1 = client.get("/")
-        assert resp1.status_code == 200
-    
-
-
-def test_fail_login_user(app):
+def test_login_success(app):
+    resp = login_user(app,username="testuser1", password="testing123", redirect=False)
     global current_user
-    assert current_user.is_authenticated
-    client = app.test_client()
-    client.get("/logout")
-    assert User.query.filter_by(username="testuser1").first().is_authenticated
-   
-    resp = login_user(app, username="testuser2", password="testing123", redirect=False)
-    assert resp.status_code == 200
-    assert b"unsuccessful" in resp.data
-
-
-
+    assert resp.status_code == 302
+    assert User.query.get(1).is_authenticated()
 
 def test_clear_database(app):
     with app.app_context():
