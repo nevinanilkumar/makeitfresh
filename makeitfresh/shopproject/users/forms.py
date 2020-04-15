@@ -177,7 +177,6 @@ class RequestResetForm(FlaskForm):
     )
     submit=SubmitField(label="request password reset")
     def validate_email(self, email):
-
         email_exists = User.query.filter_by(email=email.data.strip()).first()
         if not email_exists:
             raise ValidationError("No account associated with email address.")
@@ -185,7 +184,7 @@ class RequestResetForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     new_password = PasswordField(
-        label="password*",
+        label="new password",
         validators=[
             DataRequired(),
             Length(min=8, max=100),

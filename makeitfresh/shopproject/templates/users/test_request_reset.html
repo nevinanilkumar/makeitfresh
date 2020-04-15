@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="page-content container">
+    <div class="row">
+        <div class="col">
+            <form class="form-container" id="form" method="POST" action="{{url_for('users.request_reset_password')}}">
+                {{form.hidden_tag()}}
+                <fieldset class="loginbox">
+                    <h1 class="heading">Request Reset Password</h1>
+                    <!-- usertype -->
+                    <div class="form-group">
+                        {{form.email.label(class="label")}}<br />
+                        {% if form.email.errors %}
+                        {{form.email(class="form-control input is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.email(class="form-control input")}}
+                        {% endif %}
+                    </div>
+
+                <div>
+
+                    {{form.submit(class='button btn btn-primary btn-block')}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,7 +1,8 @@
 from shopproject import db, login_manager
+from shopproject.config import Config
 from flask_login import UserMixin
 from sqlalchemy.sql import func
-from itsdangerous import JSONWebSignatureSerializer as Serializer
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import datetime
 
 
@@ -26,18 +27,18 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
 
-    # def get_reset_token(self, expires_sec=1800):
-    #     s = Serializer(app.config['SECRET_KEY'], expires_sec)
-    #     return s.dumps({'user_id':self.id}).decode('utf-8')
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(Config.SECRET_KEY, expires_sec)
+        return s.dumps({'user_id':self.id}).decode("utf-8")
     
-    # @staticmethod
-    # def verify_reset_token(token):
-    #     s = Serializer(app.config.get('SECRET_KEY'))
-    #     try:
-    #         user_id=s.loads(token)['user_id']
-    #     except:
-    #         return None
-    #     return User.query.get(user_id)
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(Config.SECRET_KEY)
+        try:
+            user_id=s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
     
     def __str__(self):
         return f'<User {self.id}>'
