@@ -8,9 +8,9 @@ class Config:
     BCRYPT_LOG_ROUNDS = 12
     MAIL_SERVER='smtp.googlemail.com'
     MAIL_PORT = 587
-    MAIL_USERNAME = 'farihminan2@gmail.com'
-    MAIL_PASSWORD = 'nxgrtkxwkvhlrqqt'
-    MAIL_DEFAULT_SENDER = "farihminan2@gmail.com"
+    MAIL_USERNAME = 
+    MAIL_PASSWORD = 
+    MAIL_DEFAULT_SENDER = 
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
 
