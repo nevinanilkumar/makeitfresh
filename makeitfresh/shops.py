@@ -20,6 +20,7 @@ with open("csv/users.csv") as csv_file:
                 first_name=row[3],
                 last_name=row[4],
                 password=password,
+                email_verified = bool(row[6]),
             )
             db.session.add(user)
         count +=1

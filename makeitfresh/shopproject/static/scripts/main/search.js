@@ -59,7 +59,7 @@ let namespace = function () {
 
 
   function get_obj(txt) {
-    url = "http://127.0.0.1:5000/?";
+    url = "http://127.0.0.1:5000/?"
     req = new XMLHttpRequest();
     req.open("GET", url + txt, true);
     req.responseType = "json";

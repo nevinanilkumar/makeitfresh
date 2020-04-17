@@ -1,11 +1,11 @@
-USERTYPE,USERNAME,EMAIL,FIRSTNAME,LASTNAME,PASSWORD
-seller,abraham1234,abraham@lincoln.com,abraham,lincoln,test1234
-seller,grahambell1,graham@bell.com,graham,bell,graham1234
-seller,toretto123,domnic@toretto.com,domnic,toretto,domnic1234
-seller,fukru123,fukru@tiktok.com,fukru,one,fukru1234
-seller,sanju,sanju@techy.com,sanju,techy,sanju1234
-seller,tony,tony@stark.com,tony,stark,tony1234
-seller,steve,steve@rogers.com,steve,rogers,steve1234
-seller,peter,peter@parker.com,peter,parker,peter1234
-seller,bruce,bruce@wayne.com,bruce,wayne,wayne1234
-seller,farih,farih@company.com,farih,minan,farih1234
+USERTYPE,USERNAME,EMAIL,FIRSTNAME,LASTNAME,PASSWORD, EMAIL_VERIFIED
+seller,abraham1234,abraham@lincoln.com,abraham,lincoln,test1234,1
+seller,grahambell1,graham@bell.com,graham,bell,graham1234,1
+seller,toretto123,domnic@toretto.com,domnic,toretto,domnic1234,1
+seller,fukru123,fukru@tiktok.com,fukru,one,fukru1234,1
+seller,sanju,sanju@techy.com,sanju,techy,sanju1234,1
+seller,tony,tony@stark.com,tony,stark,tony1234,1
+seller,steve,steve@rogers.com,steve,rogers,steve1234,1
+seller,peter,peter@parker.com,peter,parker,peter1234,1
+seller,bruce,bruce@wayne.com,bruce,wayne,wayne1234,1
+seller,farih,farih@company.com,farih,minan,farih1234,1

@@ -4,7 +4,8 @@ from is_safe_url import is_safe_url
 from shopproject import db, bcrypt
 from shopproject.models import User
 from shopproject.users.forms import UserRegistrationForm, LoginForm, ResetPasswordForm, RequestResetForm
-from shopproject.users.utils import send_email
+from shopproject.users.utils import send_pwd_reset_email, send_email_verif
+from sqlalchemy import or_
 
 users = Blueprint('users', __name__)
 
@@ -31,11 +32,18 @@ def userRegistration():
         )
         db.session.add(new_user)
         db.session.commit()
-        flash(f"Your account has been created. Please login to view the website.", 'success')
+        if new_user:
+            token = new_user.get_reset_token()
+            url = url_for("users.verify_email", token = token, _external=True)
+            send_email_verif(new_user.email, url)
+            flash(f"Your account has been created.An email has been sent to your inbox. Please verify your email to access the website.", 'success')
+        else:
+            flash(f"Sorry your account has not been created. Please retry.")
         return redirect(url_for('users.login'))
     elif request.method == "POST" and (not form.validate_on_submit()):
         flash(f'Please correct the incorrect fields.')
     return render_template("users/register.html", title="Register", form=form)
+
 
 
 @users.route("/login",methods=['POST', 'GET'])
@@ -72,9 +80,11 @@ def logout():
 @users.route("/account")
 @login_required
 def account():
+    if not current_user.email_verified:
+        return redirect(url_for("main.home"))
     return render_template("users/account.html", title="Account")
 
-#Not complete
+#Not completeauthenticated
 @users.route("/reset_password", methods=["GET", "POST"])
 def request_reset_password():
     form = RequestResetForm()
@@ -86,14 +96,8 @@ def request_reset_password():
             if user:
                 recipient_email = user.email
                 token = user.get_reset_token()
-
                 url = url_for("users.reset_password_token", token = token, _external=True)
-                email_body = """
-                To reset your password,
-                please click the following link
-                {}
-                """.format(url)
-                send_email(recipient_email, email_body)
+                send_pwd_reset_email(recipient_email, url)
                 flash(f"Please check your inbox for steps to reset your password." ,"info")
                 return redirect(url_for("main.home"))
             else:
@@ -118,6 +122,30 @@ def reset_password_token(token):
             return redirect(url_for("users.login"))
 
     return render_template("users/test_reset_password.html", form=form, token=token)
+
+
+@users.route("/verif_email/<token>") 
+def verify_email(token):
+    if current_user.is_authenticated and current_user.email_verified:
+        return redirect(url_for("main.home"))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash("That is an invalid or expired token", "danger")
+        return
+    else:
+        user.email_verified = True
+        db.session.commit()
+        if request.method == "GET" and current_user==user:
+            flash("Your account has been activated.", "success")
+            return redirect(url_for("main.home"))
+        elif current_user != user:
+            flash("Your account has been activated. Please login to continue", "success")
+            return redirect(url_for("users.login"))
+
+            
+
+
+
 
 
 
